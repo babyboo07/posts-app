@@ -1,14 +1,19 @@
 @extends('layouts.user')
 @section('content')
     @foreach ($post as $item)
-        <div class="container max-w-7xl mx-auto" >
+        <div class="container max-w-7xl mx-auto">
             <div class="px-5 pt-40">
                 <div class="">
                     <p class="text-xl uppercase">{{ $item->genre }}</p>
                     <p class="text-3xl">{{ $item->title }}</p>
                 </div>
                 <div class="flex p-2">
-                    <img class="w-10 h-10 rounded-full" src="{{ asset('storage/profile/' . $item->user_img) }}">
+                    @if ($item->user_img != '')
+                        <img class="w-10 h-10 rounded-full" src="{{ asset('storage/profile/' . $item->user_img) }}">
+                    @else
+                        <img alt="{{ $item->name }}" src="https://randomuser.me/api/portraits/women/21.jpg"
+                            class="w-10 h-10 rounded-full" />
+                    @endif
                     <p class="p-1">
                         {{ $item->name }} <span>{{ $item->created_at }}</span>
                     </p>
