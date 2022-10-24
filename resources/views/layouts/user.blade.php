@@ -55,6 +55,9 @@
                                             <i class="fa-solid fa-arrow-right-from-bracket "></i>
                                             Logout
                                         </button></li>
+                                    <li class=""><a
+                                            class="rounded-t bg-white hover:bg-gray-400 py-2 px-5 block flex-nowrap"
+                                            href="/send-mail"><i class="fa-solid fa-envelope pr-1"></i>Send Mail</a></li>
                                 </ul>
                             </div>
                         @else
@@ -108,4 +111,5 @@
     </div>
     @include('layouts.footer')
 </body>
+
 </html>

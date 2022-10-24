@@ -82,7 +82,7 @@
                                                             role="dialog" aria-modal="true"
                                                             aria-labelledby="modal-headline">
                                                             <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-                                                                <label>Do you want delete {{$item->id}} ?</label>
+                                                                <label>Do you want delete {{ $item->id }} ?</label>
                                                             </div>
                                                             <div class="bg-gray-200 px-4 py-3 text-right">
                                                                 <form action="{{ route('category.destroy', $item->id) }}"
@@ -93,7 +93,7 @@
                                                                         class="py-2 px-4 bg-gray-500 text-white rounded hover:bg-gray-700 mr-2"
                                                                         onclick="toggleModal()"><i class="fas fa-times"></i>
                                                                         Cancel</button>
-                                                                        <button type="submit"
+                                                                    <button type="submit"
                                                                         class="py-2 px-4 bg-red-500 text-white rounded hover:bg-red-700 mr-2"><i
                                                                             class="fa-solid fa-trash"></i> Delete</button>
                                                                 </form>
@@ -102,9 +102,37 @@
                                                     </div>
                                                 </div>
                                             </td>
-                                        </tr>
                                     @endforeach
+                                    <tr id="createNew" style="display: none">
+                                        <form action="{{route('category.store')}}" method="post"
+                                            enctype="multipart/form-data">
+                                            @csrf
+                                            <td></td>
+                                            <td>
+                                                <input type="text" name="genre"
+                                                    class="block w-full border-solid border-2 border-indigo-600 p-1 mt-1 rounded-md placeholder:text-gray-300"
+                                                    placeholder="Genre" value="{{ old('genre') }}" />
+                                            </td>
+                                            <td> <button type="submit"
+                                                    class="text-white bg-blue-600  rounded text-sm px-4 py-2 m-2">Submit</button>
+                                                <button
+                                                    class="py-2 px-4 bg-red-500 text-white rounded hover:bg-red-700 mr-2"
+                                                    id="close">Cancel</button>
+                                            </td>
+                                        </form>
+                                    </tr>
                                 </tbody>
+                                <tfoot class="pt-1">
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200"></td>
+                                        <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200"></td>
+                                        <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 float-right">
+                                            <button class="py-2 px-4 bg-red-500 text-white rounded hover:bg-red-700 mr-2"
+                                                id="addRow">+</button>
+                                        </td>
+                                    </tr>
+                                </tfoot>
+                                </tr>
                             </table>
                             {{-- {!! $category->links() !!} --}}
                         </div>
@@ -118,5 +146,15 @@
             function toggleModal() {
                 document.getElementById('modal').classList.toggle('hidden')
             }
+            $(document).ready(function() {
+                $(function() {
+                    $('#close').on('click', function() {
+                        $('#createNew').hide();
+                    });
+                    $('#addRow').on('click', function() {
+                        $('#createNew').show();
+                    });
+                });
+            });
         </script>
     @endsection
